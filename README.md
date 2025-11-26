@@ -7,6 +7,13 @@ source .venv/bin/activate
 python manage.py runserver
 ```
 
+If you edit models.py file do this commands
+
+```shell
+python manage.py makemigrations
+python manage.py migrate
+```
+
 ## Run tests
 
 ```shell
