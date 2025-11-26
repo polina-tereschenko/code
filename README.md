@@ -4,6 +4,7 @@
 python -m venv .venv
 python -m pip install django~=4.0.0
 source .venv/bin/activate
+cd project/you/want/to/run
 python manage.py runserver
 ```
 
