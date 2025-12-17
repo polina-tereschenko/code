@@ -1,0 +1,104 @@
+{% load static %}
+<html>
+
+<head>
+    <title>CV</title>
+    <link href="https://fonts.googleapis.com/css?family=\
+Source+Sans+Pro:400" rel="stylesheet">
+    <link href="{% static 'css/cv.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="nav-left">
+            <h1><a href="{% url 'home' %}">Django blog</a></h1>
+        </div>
+        <div class="nav-right">
+            <a href="{% url 'post_new' %}">+ New Blog Post</a>
+        </div>
+        <div class="nav-right">
+            <a href="{% url 'text' %}">Текст</a>
+        </div>
+        <div class="nav-right">
+            <a href="{% url 'cv' %}">Резюме</a>
+        </div>
+    </header>
+    {% block content %}
+    <div class="resume">
+        <aside class="sidebar">
+            <div class="avatar">
+                <img src="{% static 'img/image.png' %}" alt="Profile photo">
+            </div>
+            <div class="sidebar-section">
+                <h3>Contact</h3>
+                <p class="contact-item">
+                    <strong>Phone</strong><br>
+                    {{ contact.phone }}
+                </p>
+                <p class="contact-item">
+                    <strong>Email</strong><br>
+                    {{ contact.email }}
+                </p>
+                <p class="contact-item">
+                    <strong>Address</strong><br>
+                    {{ contact.address }}
+                </p>
+            </div>
+            <div class="sidebar-section">
+                <h3>Education</h3>
+                {% for edu in education %}
+                <div class="education-item">
+                    <p><strong>{{ edu.period }}</strong></p>
+                    <p>{{ edu.degree }}</p>
+                    <p>{{ edu.university }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="sidebar-section">
+                <h3>Language</h3>
+                {% for lang in languages %}
+                <div class="language-item">
+                    <span>{{ lang.name }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </aside>
+        <main class="main">
+            <div class="header-main">
+                <h1>{{ person.name }}</h1>
+                <h2>{{ person.position }}</h2>
+            </div>
+            <section class="section">
+                <h3>Profile</h3>
+                <p class="profile-text">
+                    {{ person.profile }}
+                </p>
+            </section>
+            <section class="section">
+                <h3>Experience</h3>
+                {% for exp in experience %}
+                <div class="experience-item">
+                    <span>{{ exp.period }}</span>
+                    <div>
+                        <h4>{{ exp.position }}</h4>
+                        <p>{{ exp.description }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </section>
+            <section class="section">
+                <h3>Skills</h3>
+                <div class="skills">
+                    {% for skill in skills %}
+                    <div class="skill">
+                        <span class="skill-name">{{ skill.name }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </main>
+    </div>
+    {% endblock content %}
+</body>
+
+</html>

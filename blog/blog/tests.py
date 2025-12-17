@@ -72,3 +72,14 @@ class BlogTests(TestCase):
     def test_post_deleteview(self):
         response = self.client.post(reverse("post_delete", args="1"))
         self.assertEqual(response.status_code, 302)
+        
+    def test_post_createview_with_url_in_title(self):
+        response = self.client.post(
+            reverse("post_new"),
+            {
+                "title": "https://example.com",
+                "body": "Nice body content",
+                "author": self.user.id,
+            },
+        )
+        self.assertEqual(Post.objects.last().title, "A good title")
